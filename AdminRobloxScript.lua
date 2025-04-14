@@ -49,12 +49,13 @@ end)
 adminButton.MouseButton1Click:Connect(function()
     for i = 1, 50 do
         local label = Instance.new("TextLabel")
-        label.Size = UDim2.new(0, 200, 0, 50)
-        label.Position = UDim2.new(0.5, -100, 0, 100 + (i * 30))
-        label.Text = "You got hacked"
+        label.Size = UDim2.new(0, math.random(150, 300), 0, math.random(50, 100))
+        label.Position = UDim2.new(0, math.random(0, game:GetService("Workspace").CurrentCamera.ViewportSize.X), 0, math.random(0, game:GetService("Workspace").CurrentCamera.ViewportSize.Y))
+        label.Text = "YOU GOT HACKED"
         label.TextColor3 = Color3.fromRGB(0, 255, 0)
+        label.TextSize = 40
         label.BackgroundTransparency = 1
         label.Parent = screenGui
-        wait(0.1)
+        wait(0.05) -- เพิ่มเวลาเล็กน้อยเพื่อให้ข้อความแสดงแบบกระจาย
     end
 end)
