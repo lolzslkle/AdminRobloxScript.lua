@@ -1,61 +1,54 @@
--- สร้าง GUI
+-- GUI หลัก
+local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "AdminScriptGUI"
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+screenGui.Name = "AdminFunGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = player:WaitForChild("PlayerGui")
 
--- สร้าง Frame
+-- เฟรม GUI
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 200, 0, 150)
-frame.Position = UDim2.new(0.5, -100, 0.5, -75)
+frame.Size = UDim2.new(0, 250, 0, 150)
+frame.Position = UDim2.new(0.5, -125, 0.5, -75)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.Parent = screenGui
 
--- สร้างปุ่ม Fly
-local flyButton = Instance.new("TextButton")
-flyButton.Size = UDim2.new(0, 180, 0, 40)
-flyButton.Position = UDim2.new(0, 10, 0, 10)
-flyButton.Text = "Fly"
-flyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-flyButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-flyButton.Parent = frame
+-- หัว GUI (เครดิต)
+local header = Instance.new("TextLabel")
+header.Size = UDim2.new(1, 0, 0, 30)
+header.Position = UDim2.new(0, 0, 0, 0)
+header.BackgroundTransparency = 1
+header.Text = "Script made by Kittipop Leeswat"
+header.TextColor3 = Color3.fromRGB(0, 255, 0)
+header.Font = Enum.Font.SourceSansBold
+header.TextScaled = true
+header.Parent = frame
 
--- สร้างปุ่ม Admin
+-- ปุ่ม Admin
 local adminButton = Instance.new("TextButton")
-adminButton.Size = UDim2.new(0, 180, 0, 40)
-adminButton.Position = UDim2.new(0, 10, 0, 60)
+adminButton.Size = UDim2.new(0, 220, 0, 40)
+adminButton.Position = UDim2.new(0.5, -110, 0.5, -20)
 adminButton.Text = "Admin"
 adminButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 adminButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+adminButton.Font = Enum.Font.GothamBold
+adminButton.TextScaled = true
 adminButton.Parent = frame
 
--- สร้างฟังก์ชัน Fly
-local isFlying = false
-local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
-
-flyButton.MouseButton1Click:Connect(function()
-    if isFlying then
-        humanoid.PlatformStand = false
-        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 10, 0))
-        isFlying = false
-        flyButton.Text = "Fly"
-    else
-        humanoid.PlatformStand = true
-        isFlying = true
-        flyButton.Text = "Stop Fly"
-    end
-end)
-
--- สร้างฟังก์ชัน Admin
+-- เมื่อกดปุ่ม Admin → ข้อความกระจายทั่วหน้าจอ
 adminButton.MouseButton1Click:Connect(function()
-    for i = 1, 50 do
-        local label = Instance.new("TextLabel")
-        label.Size = UDim2.new(0, math.random(150, 300), 0, math.random(50, 100))
-        label.Position = UDim2.new(0, math.random(0, game:GetService("Workspace").CurrentCamera.ViewportSize.X), 0, math.random(0, game:GetService("Workspace").CurrentCamera.ViewportSize.Y))
-        label.Text = "YOU GOT HACKED"
-        label.TextColor3 = Color3.fromRGB(0, 255, 0)
-        label.TextSize = 40
-        label.BackgroundTransparency = 1
-        label.Parent = screenGui
-        wait(0.05) -- เพิ่มเวลาเล็กน้อยเพื่อให้ข้อความแสดงแบบกระจาย
-    end
+	for i = 1, 80 do
+		local label = Instance.new("TextLabel")
+		label.Size = UDim2.new(0, math.random(150, 300), 0, 50)
+		label.Position = UDim2.new(math.random(), -50, math.random(), -25)
+		label.Text = "You got hacked lol"
+		label.TextColor3 = Color3.fromRGB(255, 0, 0)
+		label.TextStrokeTransparency = 0.3
+		label.Font = Enum.Font.ArialBold
+		label.TextScaled = true
+		label.BackgroundTransparency = 1
+		label.Parent = screenGui
+
+		game:GetService("Debris"):AddItem(label, 2) -- ลบอัตโนมัติหลัง 2 วิ
+		wait(0.03)
+	end
 end)
